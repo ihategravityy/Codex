@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RapidCare | Emergency Hospital Alert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#">Rapid<span>Care</span></a>
+      <div class="system-status"><span></span> Emergency network online</div>
+      <button class="profile" aria-label="User profile">JD</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">EMERGENCY RESPONSE PLATFORM</p>
+          <h1>Get help moving<br />before you arrive.</h1>
+          <p class="intro">Send a verified accident alert to nearby hospitals, share a precise location, and help emergency teams prepare sooner.</p>
+        </div>
+        <div class="emergency-card">
+          <div class="pulse-icon">✚</div>
+          <div><strong>24/7 emergency coordination</strong><small>For immediate danger, also call your local emergency number.</small></div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Emergency alert workspace">
+        <form id="alert-form" class="panel report-panel">
+          <div class="section-heading"><div><p class="eyebrow">STEP 1</p><h2>Report an accident</h2></div><span class="step-number">01</span></div>
+          <label>Incident type
+            <select id="incident" required>
+              <option value="Road traffic accident">Road traffic accident</option>
+              <option value="Fall / injury">Fall / injury</option>
+              <option value="Fire incident">Fire incident</option>
+              <option value="Other emergency">Other emergency</option>
+            </select>
+          </label>
+          <div class="field-grid">
+            <label>People affected<input id="people" type="number" min="1" value="1" required /></label>
+            <label>Severity<select id="severity"><option value="Critical">Critical</option><option value="Serious">Serious</option><option value="Moderate">Moderate</option></select></label>
+          </div>
+          <label>Location
+            <div class="location-row"><input id="location" value="Location not shared yet" required /><button id="locate" type="button">Use my location</button></div>
+          </label>
+          <label>Notes <span class="optional">optional</span><textarea id="notes" placeholder="E.g. vehicle collision; one person unconscious."></textarea></label>
+          <button class="primary-button" type="submit">Send hospital alert <span>→</span></button>
+          <p class="privacy-note">Your location is used only to identify nearby emergency facilities.</p>
+        </form>
+
+        <section class="panel hospital-panel">
+          <div class="section-heading"><div><p class="eyebrow">STEP 2</p><h2>Nearby emergency units</h2></div><span class="step-number">02</span></div>
+          <div class="map" aria-label="Illustrative location map">
+            <div class="map-lines"></div><div class="map-marker user-marker">●<small>You</small></div><div class="map-marker hospital-marker one">✚<small>City General</small></div><div class="map-marker hospital-marker two">✚<small>St. Mary’s</small></div>
+            <p>Location preview</p>
+          </div>
+          <div id="hospital-list" class="hospital-list">
+            <article class="hospital"><div class="hospital-icon">✚</div><div><h3>City General Hospital</h3><p>1.2 km away · Emergency unit available</p></div><span class="available">Available</span></article>
+            <article class="hospital"><div class="hospital-icon">✚</div><div><h3>St. Mary’s Medical Centre</h3><p>2.6 km away · Trauma unit available</p></div><span class="available">Available</span></article>
+            <article class="hospital"><div class="hospital-icon muted">✚</div><div><h3>Westside Hospital</h3><p>4.1 km away · Emergency unit busy</p></div><span class="busy">Busy</span></article>
+          </div>
+        </section>
+      </section>
+
+      <section class="flow"><div><b>1</b><span>Report incident</span></div><i></i><div><b>2</b><span>Hospitals receive alert</span></div><i></i><div><b>3</b><span>Team acknowledges</span></div><i></i><div><b>4</b><span>Care is prepared</span></div></section>
+    </main>
+
+    <div id="success-modal" class="modal" aria-hidden="true"><div class="modal-card"><div class="success-icon">✓</div><p class="eyebrow">ALERT DELIVERED</p><h2>Hospitals have been notified.</h2><p id="modal-text">Your incident has been sent to the closest available emergency units.</p><button id="close-modal" class="primary-button">Done</button></div></div>
+    <script src="app.js"></script>
+  </body>
+</html>

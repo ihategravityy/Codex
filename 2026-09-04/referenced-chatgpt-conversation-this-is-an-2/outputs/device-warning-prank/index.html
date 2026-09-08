@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101828" />
+    <title>Device Integrity Notice</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="notice-card" aria-live="polite">
+        <div class="topline">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>DEVICE STATUS</span>
+          <span class="time" id="time">--:--</span>
+        </div>
+
+        <div class="content" id="warningScreen">
+          <div class="warning-icon" aria-hidden="true">!</div>
+          <p class="eyebrow">DEVICE INTEGRITY NOTICE</p>
+          <h1>Verification recommended</h1>
+          <p class="message">A routine integrity check has flagged an item that needs your attention.</p>
+          <div class="detail-box">
+            <span>CHECK TYPE</span>
+            <strong>System integrity review</strong>
+            <span>STATUS</span>
+            <strong class="amber">Attention required</strong>
+          </div>
+          <button type="button" id="verifyButton">Run verification</button>
+          <p class="fine-print">This page cannot access your device, files, camera, or personal information.</p>
+        </div>
+
+        <div class="content hidden" id="scanScreen">
+          <div class="scan-icon" aria-hidden="true"><span></span></div>
+          <p class="eyebrow">VERIFYING DEVICE</p>
+          <h1 id="scanTitle">Preparing review…</h1>
+          <p class="message" id="scanMessage">Checking the simulated security status.</p>
+          <div class="progress-track" aria-label="Verification progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <div class="progress-label"><span id="progressText">0%</span><span>PLEASE WAIT</span></div>
+          <ul class="checks" id="checks">
+            <li>Reviewing app permissions</li>
+            <li>Checking network settings</li>
+            <li>Confirming device safeguards</li>
+          </ul>
+        </div>
+
+        <div class="content hidden reveal" id="revealScreen">
+          <div class="success-icon" aria-hidden="true">✓</div>
+          <p class="eyebrow">VERIFICATION COMPLETE</p>
+          <h1>You’ve been pranked.</h1>
+          <p class="message">Nothing was scanned, changed, collected, or accessed. This was only a harmless fictional warning page.</p>
+          <div class="detail-box result-box">
+            <span>RESULT</span>
+            <strong>Friend successfully surprised</strong>
+          </div>
+          <button type="button" class="secondary" id="restartButton">Run it again</button>
+        </div>
+      </section>
+      <p class="footer">Fictional demonstration · no device access</p>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

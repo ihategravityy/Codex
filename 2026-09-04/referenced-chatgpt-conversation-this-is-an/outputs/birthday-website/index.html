@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+
+  <style>
+    /* 1. Page setup */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #7c3aed, #ec4899, #fb7185);
+    }
+
+    /* Soft colored circles make the background feel less flat. */
+    .glow {
+      position: fixed;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      filter: blur(20px);
+      opacity: 0.45;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .glow-one {
+      top: -100px;
+      left: -80px;
+      background: #fcd34d;
+    }
+
+    .glow-two {
+      right: -100px;
+      bottom: -120px;
+      background: #60a5fa;
+      animation-delay: -3s;
+    }
+
+    @keyframes float {
+      50% {
+        transform: translateY(28px) translateX(14px);
+      }
+    }
+
+    /* 2. Main message area */
+    .birthday-page {
+      position: relative;
+      z-index: 1;
+      width: min(720px, 100%);
+      padding: clamp(32px, 7vw, 70px);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 25px 70px rgba(55, 15, 85, 0.3);
+      backdrop-filter: blur(14px);
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .cake {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: clamp(4rem, 12vw, 6.5rem);
+      filter: drop-shadow(0 8px 10px rgba(77, 14, 81, 0.24));
+      animation: bounce 2.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      50% {
+        transform: translateY(-10px) rotate(3deg);
+      }
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 9vw, 5.8rem);
+      line-height: 0.95;
+    }
+
+    .name {
+      margin: 18px 0;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: bold;
+    }
+
+    .message {
+      max-width: 540px;
+      margin: 0 auto 30px;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      line-height: 1.7;
+    }
+
+    /* 3. Button and the hidden surprise message */
+    #surpriseButton {
+      padding: 15px 24px;
+      border: 0;
+      border-radius: 999px;
+      color: #7c2d12;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(77, 14, 81, 0.28);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #surpriseButton:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 13px 25px rgba(77, 14, 81, 0.35);
+    }
+
+    #surpriseMessage {
+      max-height: 0;
+      margin: 0;
+      overflow: hidden;
+      font-size: 1.1rem;
+      font-weight: bold;
+      opacity: 0;
+      transition: max-height 0.45s ease, margin 0.45s ease, opacity 0.45s ease;
+    }
+
+    #surpriseMessage.show {
+      max-height: 100px;
+      margin-top: 24px;
+      opacity: 1;
+    }
+
+    /* These confetti pieces are created by JavaScript. */
+    .confetti {
+      position: fixed;
+      z-index: 3;
+      top: -20px;
+      width: 10px;
+      height: 16px;
+      border-radius: 3px;
+      pointer-events: none;
+      animation: fall 2.7s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+
+  <main class="birthday-page">
+    <p class="eyebrow">A special day to celebrate</p>
+    <div class="cake" aria-hidden="true">🎂</div>
+    <h1>Happy<br />Birthday!</h1>
+    <!-- Change “Alex” to the birthday person's name. -->
+    <p class="name">Dear Alex ✨</p>
+    <p class="message">
+      Today is all about you. I hope your year ahead is full of laughter,
+      beautiful surprises, and every dream you are working toward.
+    </p>
+    <button id="surpriseButton">Open your surprise 🎁</button>
+    <p id="surpriseMessage" aria-live="polite">
+      You make the world brighter. Have the most amazing birthday! 🎉
+    </p>
+  </main>
+
+  <script>
+    // Find the button and the hidden message in the page.
+    const surpriseButton = document.getElementById("surpriseButton");
+    const surpriseMessage = document.getElementById("surpriseMessage");
+
+    // This function creates one falling piece of confetti.
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      const colors = ["#fcd34d", "#ffffff", "#60a5fa", "#f9a8d4", "#bbf7d0"];
+
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDelay = Math.random() * 0.4 + "s";
+      document.body.appendChild(confetti);
+
+      // Remove it after the falling animation finishes.
+      setTimeout(() => confetti.remove(), 3200);
+    }
+
+    // When the button is clicked, reveal the note and release confetti.
+    surpriseButton.addEventListener("click", () => {
+      surpriseMessage.classList.add("show");
+      surpriseButton.textContent = "Surprise opened! ✨";
+
+      for (let i = 0; i < 70; i++) {
+        createConfetti();
+      }
+    });
+  </script>
+</body>
+</html>
